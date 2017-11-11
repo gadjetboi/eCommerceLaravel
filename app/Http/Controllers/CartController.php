@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCartRequest;
 use Config;
+use Debugbar;
 
 class CartController extends Controller
 {
@@ -16,24 +17,34 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
+    {       
         //$request->session()->flush();
         $requestSession = $request->session();
+        //Debugbar::info($requestSession);
         $productsOnCart = [];
 
         if(!$requestSession->has(Config::get('constants.SESSIONS.CART'))) 
         {
             return view('cart', ['productsOnCart' => $productsOnCart]);
         }  
-       
+
+        $cartSubTotal = 0;       
         foreach($requestSession->get(Config::get('constants.SESSIONS.CART')) as $cart)
         {
             $product = Product::find($cart->product_id);
-
+        
+            $cartSubTotal += $product->price;
+            
             array_push($productsOnCart, $product);
         }
+
+        $shippingFee = 1.50; //TODO: set up and tie per location. For now it's free;
+        $totalPrice = $cartSubTotal + $shippingFee;
       
-        return view('cart', ['productsOnCart' => $productsOnCart]);
+        return view('cart', ['productsOnCart' => $productsOnCart,
+                             'shippingFee' => $shippingFee,
+                             'cartSubTotal' => $cartSubTotal,
+                             'totalPrice' => $totalPrice]);
     }
 
     /**

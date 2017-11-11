@@ -14,7 +14,8 @@
 Route::group(['middleware' => 'web'], function () {
     Route::resources([
         '/' => 'MainController',
-        'cart' => 'CartController'
+        'cart' => 'CartController',
+        'checkout' => 'CheckoutController',
     ]);
    
     Auth::routes();
@@ -22,6 +23,5 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/products/{filter}/{id}', 'ProductController@index')->name('product');
     Route::get('/product-detail/{id}', 'ProductDetailController@index')->name('productDetail');
-    Route::get('/checkout', 'CheckoutController@index')->name('checkout');
 });
 

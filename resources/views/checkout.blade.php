@@ -10,51 +10,14 @@
 				  <li class="active">Check out</li>
 				</ol>
 			</div><!--/breadcrums-->
-
-			<div class="step-one">
-				<h2 class="heading">Step1</h2>
-			</div>
-			<div class="checkout-options">
-				<h3>New User</h3>
-				<p>Checkout options</p>
-				<ul class="nav">
-					<li>
-						<label><input type="checkbox"> Register Account</label>
-					</li>
-					<li>
-						<label><input type="checkbox"> Guest Checkout</label>
-					</li>
-					<li>
-						<a href=""><i class="fa fa-times"></i>Cancel</a>
-					</li>
-				</ul>
-			</div><!--/checkout-options-->
-
-			<div class="register-req">
-				<p>Please use Register And Checkout to easily get access to your order history, or use Checkout as Guest</p>
-			</div><!--/register-req-->
-
+			{!! Form::open(['method' => 'POST', 'route' => ['checkout.store']]) !!}
 			<div class="shopper-informations">
 				<div class="row">
-					<div class="col-sm-3">
-						<div class="shopper-info">
-							<p>Shopper Information</p>
-							<form>
-								<input type="text" placeholder="Display Name">
-								<input type="text" placeholder="User Name">
-								<input type="password" placeholder="Password">
-								<input type="password" placeholder="Confirm password">
-							</form>
-							<a class="btn btn-primary" href="">Get Quotes</a>
-							<a class="btn btn-primary" href="">Continue</a>
-						</div>
-					</div>
 					<div class="col-sm-5 clearfix">
 						<div class="bill-to">
-							<p>Bill To</p>
+							<p>Shipping Address</p>
 							<div class="form-one">
 								<form>
-									<input type="text" placeholder="Company Name">
 									<input type="text" placeholder="Email*">
 									<input type="text" placeholder="Title">
 									<input type="text" placeholder="First Name *">
@@ -89,10 +52,7 @@
 										<option>Canada</option>
 										<option>Dubai</option>
 									</select>
-									<input type="password" placeholder="Confirm password">
 									<input type="text" placeholder="Phone *">
-									<input type="text" placeholder="Mobile Phone">
-									<input type="text" placeholder="Fax">
 								</form>
 							</div>
 						</div>
@@ -101,7 +61,6 @@
 						<div class="order-message">
 							<p>Shipping Order</p>
 							<textarea name="message"  placeholder="Notes about your order, Special Notes for Delivery" rows="16"></textarea>
-							<label><input type="checkbox"> Shipping to bill address</label>
 						</div>	
 					</div>					
 				</div>
@@ -119,7 +78,6 @@
 							<td class="price">Price</td>
 							<td class="quantity">Quantity</td>
 							<td class="total">Total</td>
-							<td></td>
 						</tr>
 					</thead>
 					<tbody>
@@ -134,18 +92,11 @@
 							<td class="cart_price">
 								<p>$59</p>
 							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
+							<td class="cart_price">
+								<p>1</p>
 							</td>
 							<td class="cart_total">
 								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
 							</td>
 						</tr>
 
@@ -160,18 +111,11 @@
 							<td class="cart_price">
 								<p>$59</p>
 							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
+							<td class="cart_price">
+								<p>1</p>
 							</td>
 							<td class="cart_total">
 								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -185,20 +129,12 @@
 							<td class="cart_price">
 								<p>$59</p>
 							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
+							<td class="cart_price">
+								<p>1</p>
 							</td>
 							<td class="cart_total">
 								<p class="cart_total_price">$59</p>
 							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
 						<tr>
 							<td colspan="4">&nbsp;</td>
 							<td colspan="2">
@@ -206,10 +142,6 @@
 									<tr>
 										<td>Cart Sub Total</td>
 										<td>$59</td>
-									</tr>
-									<tr>
-										<td>Exo Tax</td>
-										<td>$2</td>
 									</tr>
 									<tr class="shipping-cost">
 										<td>Shipping Cost</td>
@@ -226,16 +158,9 @@
 				</table>
 			</div>
 			<div class="payment-options">
-					<span>
-						<label><input type="checkbox"> Direct Bank Transfer</label>
-					</span>
-					<span>
-						<label><input type="checkbox"> Check Payment</label>
-					</span>
-					<span>
-						<label><input type="checkbox"> Paypal</label>
-					</span>
-				</div>
+				{!! Form::submit(trans('Proceed to payment'), ['class' => 'btn btn-primary']) !!}			
+			</div>
+			{{ Form::close() }}
 		</div>
 	</section> <!--/#cart_items-->
     
